@@ -1,5 +1,6 @@
 import time
 from InquirerPy import inquirer
+score = 0
 def game_start(question_set):
     for i in range(10):
         shuf_question_set = set(question_set[i][1])
@@ -15,4 +16,16 @@ def game_start(question_set):
         ).execute()
         if answer == question_set[i][1][0]:
             end = time.time()
-            print("")
+            print("Correct!")
+            time = end-start
+            points = round(15 - time)
+            if points < 0:
+                points = 0
+            score += points
+            print(f"You earned {points} points!")
+        else:
+            print("Incorrect.")
+            print("You earned 0 points.")
+    print(f"You annswered ten questions, earning {score} points!")
+    return
+

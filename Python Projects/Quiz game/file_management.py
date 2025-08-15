@@ -1,6 +1,11 @@
 import csv
 
-def read_questions(gen,baby,animals,hard_gen,sci):
+def read_questions():
+    gen = []
+    baby = []
+    animals = []
+    hard_gen = []
+    sci = []
     with open('Python Projects\Quiz game\questions.csv') as file:
         reader = csv.reader(file)
         next(reader)
