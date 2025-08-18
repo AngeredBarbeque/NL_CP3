@@ -57,7 +57,8 @@ def main():
             elif category == 'Science':
                 category = sci.copy()
             else:
-                return
+                categories = sort_categories(other)
+                
             game_start(category)
         elif action == 'Create quiz questions':
             create_questions()

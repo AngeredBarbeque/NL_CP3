@@ -5,11 +5,15 @@ from file_management import write_questions
 
 def create_questions():
     questions = []
-    amount = input("How many questions would you like to create?\n")
+    amount = input("How many questions would you like to create? (Must be 10 or more.)\n")
     try:
         int(amount)
     except:
         print("Please enter a number.")
+        return
+    amount = int(amount)
+    if amount < 10:
+        print("Please enter a number higher than 10.")
         return
     category = input("What would you like to name this category?")
     for i in range(amount):
@@ -23,8 +27,14 @@ def create_questions():
     print("Success!")
     return
 
-def sort_others(other):
+def sort_categories(other):
+    categories = []
     for i in other:
-        pass
-    return
+        if i[0] not in categories:
+            categories.append(i[0])
+    return categories
+
+def sort_other(categories, other):
+    #MAKE THIS
+    pass
              

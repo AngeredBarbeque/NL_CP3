@@ -7,7 +7,7 @@ def read_questions():
     hard_gen = []
     sci = []
     other = []
-    with open('Python Projects/Quiz game/questions.csv') as file:
+    with open('Python Projects/Quiz game/questions.csv',mode='r') as file:
         reader = csv.reader(file)
         next(reader)
         row_num = 2
@@ -24,17 +24,19 @@ def read_questions():
                 sci.append([row[1],[row[2],row[3],row[4],row[5]]])
             else:
                 other.append([row[0],[row[1],[row[2],row[3],row[4],row[5]]]])
-            random.shuffle(gen)
-            random.shuffle(baby)
-            random.shuffle(animals)
-            random.shuffle(hard_gen)
-            random.shuffle(sci)
-            random.shuffle(other)
+            row_num += 1
+        random.shuffle(gen)
+        random.shuffle(baby)
+        random.shuffle(animals)
+        random.shuffle(hard_gen)
+        random.shuffle(sci)
+        random.shuffle(other)
     return gen, baby, animals, hard_gen, sci, other
 
 def write_questions(questions):
+    #Doesn't work
     with open('Python Projects/Quiz game/questions.csv',mode='a',newline=''):
-        writer = csv.writer
+        writer = csv.writer()
         for i in questions:
             writer.writerow(i)
 
