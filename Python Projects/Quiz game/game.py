@@ -3,6 +3,7 @@ from InquirerPy import inquirer
 score = 0
 def game_start(question_set):
     for i in range(10):
+        #START PRINT DEBUGGING
         shuf_question_set = set(question_set[i][1])
         start = time.time()
         answer = inquirer.select(
