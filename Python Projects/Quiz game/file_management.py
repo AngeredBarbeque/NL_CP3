@@ -34,9 +34,8 @@ def read_questions():
     return gen, baby, animals, hard_gen, sci, other
 
 def write_questions(questions):
-    #Doesn't work
-    with open('Python Projects/Quiz game/questions.csv',mode='a',newline=''):
-        writer = csv.writer()
+    with open('Python Projects/Quiz game/questions.csv',mode='a',newline='') as file:
+        writer = csv.writer(file, delimiter=',')
         for i in questions:
             writer.writerow(i)
 

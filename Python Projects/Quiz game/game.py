@@ -7,6 +7,8 @@ def game_start(question_set):
     score = 0
     cor_questions = copy.deepcopy(question_set)
     for i in range(10):
+        print(i)
+        print(question_set)
         random.shuffle(question_set[i][1])
         start = time.time()
         answer = inquirer.select(

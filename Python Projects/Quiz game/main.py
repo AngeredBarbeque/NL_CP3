@@ -57,9 +57,24 @@ def main():
             elif category == 'Science':
                 category = sci.copy()
             else:
+                try: 
+                    other[0]
+                except:
+                    print("Please create a custom category first.")
+                    continue
                 categories = sort_categories(other)
-                
-            game_start(category)
+                categ_names = []
+                for i in categories:
+                    categ_names.append(list(i)[0])
+                other_category = inquirer.select(
+                    message = 'What custom category would you like?',
+                    choices = categ_names
+                ).execute()
+                for i in categories:
+                    if other_category == list(i)[0]:
+                        category = i.copy()
+                print(category[f'{other_category}'])
+            game_start(category[f'{other_category}'])
         elif action == 'Create quiz questions':
             create_questions()
         else:

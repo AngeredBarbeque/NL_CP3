@@ -22,7 +22,7 @@ def create_questions():
         ans_two = input("What is one of the wrong answers?")
         ans_three = input("What is one of the wrong answers?")
         ans_four = input("What is one of the wrong answers?")
-        questions.append(f'{category},{question},{cor_ans},{ans_two},{ans_three},{ans_four}')
+        questions.append(f'{category}{question}{cor_ans}{ans_two}{ans_three}{ans_four}')
     write_questions(questions)
     print("Success!")
     return
@@ -32,9 +32,21 @@ def sort_categories(other):
     for i in other:
         if i[0] not in categories:
             categories.append(i[0])
-    return categories
+    return sort_other(categories, other)
 
 def sort_other(categories, other):
-    #MAKE THIS
-    pass
+    dict_categories = []
+    for i in categories:
+        dict_categories.append(create_category(other,i))
+    return dict_categories
+
              
+def create_category(other, category):
+    questions = []
+    for i in other:
+        if i[0] == category:
+            questions.append([i[1][0],[i[1][1][0],i[1][1][1],i[1][1][2],i[1][1][3]]])
+    dict_category = {
+        category : questions
+    }
+    return dict_category
