@@ -12,11 +12,11 @@ def read_users():
 
 def sign_in():
     admins = read_users()
-    username = input("Please enter your username.\n")
+    username = input("Please enter your username.\n").lower()
     password = input("Please enter your password.\n")
     #Checks if your inputs match a username and password
     for i in admins:
-        if i[0] == username and i[1] == password:
+        if i[0].lower() == username and i[1] == password:
             print(f'Success! Signed in as {i[0]}')
             return True
     print("Sign in failed.")
