@@ -8,6 +8,7 @@ def read_questions():
     sci = []
     other = []
     with open('Python Projects/Quiz game/questions.csv',mode='r') as file:
+        #Appends questions to categories based on row number
         reader = csv.reader(file)
         next(reader)
         row_num = 2
@@ -25,6 +26,7 @@ def read_questions():
             else:
                 other.append([row[0],[row[1],[row[2],row[3],row[4],row[5]]]])
             row_num += 1
+        #Shuffles question order
         random.shuffle(gen)
         random.shuffle(baby)
         random.shuffle(animals)
@@ -34,6 +36,7 @@ def read_questions():
     return gen, baby, animals, hard_gen, sci, other
 
 def write_questions(questions):
+    #Writes custom questions to the end of the CSV file
     with open('Python Projects/Quiz game/questions.csv',mode='a',newline='') as file:
         writer = csv.writer(file, delimiter=',')
         for i in questions:

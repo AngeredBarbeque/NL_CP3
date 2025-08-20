@@ -111,13 +111,13 @@ Animal,How do rats communicate with each other?,High-frequency sounds visible on
 Animal,Which of these is a common behavior in rats?,Grooming each other to bond,Burying food underground,Hibernating in winter,Living alone in the wild
 Animal,What is a male chicken called?,Rooster,Hen,Chick,Pullet
 Animal,How long does it take for a chicken egg to hatch?,21 days,14 days,30 days,10 days
-Animal,What is the purpose of a chicken’s comb?,Regulates body temperature,Helps them fly,Stores food,Attracts insects
+Animal,What is the purpose of a chicken's comb?,Regulates body temperature,Helps them fly,Stores food,Attracts insects
 Animal,Which breed is known for laying the most eggs?,Leghorn,Silkie,Brahma,Orpington
 Animal,What do chickens primarily eat?,Grains and insects,Leaves and grass,Fish and meat,Fruit only
 Animal,What is the term for a young female chicken?,Pullet,Cockerel,Hen,Rooster
 Animal,How many toes do most chickens have?,Four,Three,Five,Six
-Animal,What is a chicken’s gizzard used for?,Grinding food,Fighting bacteria,Producing eggs,Filtering toxins
-Animal,What is the red flap of skin under a chicken’s beak called?,Wattle,Crest,Comb,Gill
+Animal,What is a chicken's gizzard used for?,Grinding food,Fighting bacteria,Producing eggs,Filtering toxins
+Animal,What is the red flap of skin under a chicken's beak called?,Wattle,Crest,Comb,Gill
 Animal,At what age do most hens start laying eggs?,Around 5 to 6 months,At birth,Around 1 year,Around 2 months
 Animal,Where do fish live?,Water,Tree,Sky,Grass  
 Animal,What do fish use to swim?,Fins,Arms,Legs,Wings  
@@ -198,12 +198,12 @@ Hard General,Which country has the deepest lake?,Russia,Canada,USA,Kazakhstan
 Hard General,Which country has the most pyramids in the world?,Sudan,Egypt,Peru,India  
 Hard General,Which U.S. president served the shortest term?,William Henry Harrison,James Garfield,Millard Fillmore,John Tyler  
 Hard General,Which empire built Machu Picchu?,Inca,Maya,Aztec,Olmec  
-Hard General,Which European country has a lion, unicorn, and harp on its royal coat of arms?,United Kingdom,France,Spain,Netherlands
+Hard General,Which European country has a lion unicorn and harp on its royal coat of arms?,United Kingdom,France,Spain,Netherlands
 Science,What particle has a negative charge?,Electron,Proton,Neutron,Photon  
 Science,What is the chemical symbol for tungsten?,W,Tu,Tg,Tn  
 Science,Which organelle is known as the powerhouse of the cell?,Mitochondria,Nucleus,Ribosome,Chloroplast  
 Science,What is the second most abundant gas in Earth's atmosphere?,Oxygen,Nitrogen,Carbon dioxide,Argon  
-Science,What law explains the relationship between pressure and volume of a gas?,Boyle’s Law,Charles’s Law,Avogadro’s Law,Newton’s Law  
+Science,What law explains the relationship between pressure and volume of a gas?,Boyle's Law,Charles's Law,Avogadro's Law,Newton's Law  
 Science,What is the pH of pure water at 25°C?,7,0,14,4  
 Science,Which vitamin is produced when the skin is exposed to sunlight?,Vitamin D,Vitamin C,Vitamin A,Vitamin B12  
 Science,What element has the atomic number 26?,Iron,Copper,Zinc,Lead  
@@ -248,14 +248,4 @@ Science,What is the function of ribosomes in a cell?,Protein synthesis,DNA repli
 Science,What is the term for animals that eat both plants and meat?,Omnivores,Carnivores,Herbivores,Detritivores  
 Science,What natural disaster is measured using the Richter scale?,Earthquake,Volcano,Hurricane,Tornado
 Science,What is the term for the measure of a material's resistance to deformation?,Hardness,Density,Viscosity,Elasticity  
-Science,Which subatomic particle was discovered by J.J. Thomson in 1897?,Electron,Proton,Neutron,Photonq,q,q,q,q,q
-q,q,q,q,q,q
-q,q,q,q,q,q
-q,q,q,q,q,q
-q,q,q,q,q,q
-q,q,q,q,q,q
-q,q,q,q,q,q
-q,q,q,q,q,q
-q,q,q,q,q,q
-q,q,q,q,q,q
-q,q,q,q,q,q
+Science,Which subatomic particle was discovered by J.J. Thomson in 1897?,Electron,Proton,Neutron,Photon

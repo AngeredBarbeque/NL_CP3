@@ -1,5 +1,6 @@
 import csv
 
+#Creats a list of users and passwords
 def read_users():
     users = []
     with open('Python Projects/Quiz game/users.csv',mode='r') as file:
@@ -11,8 +12,9 @@ def read_users():
 
 def sign_in():
     admins = read_users()
-    username = input("Please enter your username.")
-    password = input("Please enter your password.")
+    username = input("Please enter your username.\n")
+    password = input("Please enter your password.\n")
+    #Checks if your inputs match a username and password
     for i in admins:
         if i[0] == username and i[1] == password:
             print(f'Success! Signed in as {i[0]}')
