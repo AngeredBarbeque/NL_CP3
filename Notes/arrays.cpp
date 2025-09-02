@@ -43,10 +43,10 @@
 
 
 //                      How do you sort an array
-//
+//  methods like bubble sorting, which in particular compares two numbers of an array and switches them if the first number is bigger.
 
 //              How do you make a multi-dimensional array
-//
+//  int matrix[3][3] = {{1,2,3},{4,5,6},{7,8,9}};
 
 
 #include <iostream>
