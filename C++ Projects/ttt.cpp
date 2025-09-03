@@ -7,25 +7,30 @@ int board[3][3] = {
     {7,8,9}};
 int len = size(board);
 
-void print_board(int board[]) {
-    for (int i=0; i < len; i++) {
-        int row[3] = board[i];
-        for (int j=0; j < size(row); j++) {
+void print_board()
+{
+    for (int i = 0; i < len; i++)
+    {
+        auto row = board[i];
+        for (int j = 0; j < size(board[i]); j++)
+        {
             cout << row[j];
-            if (j != 2) {
+            if (j != 2)
+            {
                 cout << '|';
             }
-        cout << endl;
-        if (i != 2) {
-            cout << '-----';
         }
+        cout << endl;
+        if (i != 2)
+        {
+            cout << "-----" << endl;
         }
     }
-    } 
-
+}
 
 int main() {
     cout << len << endl;
+    print_board();
     return 0;
 }
 
