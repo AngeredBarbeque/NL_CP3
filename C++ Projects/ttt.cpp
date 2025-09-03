@@ -1,23 +1,25 @@
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 
-int board[3][3] = {
-    {1,2,3}, 
-    {4,5,6}, 
-    {7,8,9}};
+string board[3][3] = {
+    {" "," "," "}, 
+    {" "," "," "}, 
+    {" "," "," "}};
 int len = size(board);
 
+//Displays the board in a nice way
 void print_board()
 {
     for (int i = 0; i < len; i++)
     {
-        auto row = board[i];
         for (int j = 0; j < size(board[i]); j++)
         {
-            cout << row[j];
+            cout << board[i][j];
             if (j != 2)
             {
-                cout << '|';
+                cout << "|";
             }
         }
         cout << endl;
@@ -28,89 +30,120 @@ void print_board()
     }
 }
 
-int main() {
-    cout << len << endl;
-    print_board();
-    return 0;
+//Tries to add your desired letter to the desired location
+bool turn(int row, int column, string letter) {
+    if (board[row-1][column-1] == " ") {
+        board[row-1][column-1] = letter;
+        return true;
+    }
+    return false;
 }
 
-/* 
-def printBoard(board):
-    for idx, item in enumerate(board):
-        for index, i in (enumerate(item)):
-            print(i, end = "")
-            if index != 2:
-                print("|", end = "")
-        print("")
-        if idx != 2:
-            print("-----")
+//Checks if there are three letters in a row
+bool three_in_a_row(string letter) {
+    bool all_same = true;
 
-def turn(row, column, letter):
-        if board[row-1][column-1] == " ":
-           board[row-1][column-1] = letter
-           return True
-        return False
+    for (int i = 0; i < len; i++) {
+            all_same = true;
+        for (int j = 0; j < size(board[i]); j++) {
+            if (board[i][j] != letter) {
+                all_same = false;
+            }
+        if (all_same) {
+            return true;
+        }
+        }
+    }
 
-def threeInARow(board, letter):
-    for row in board:
-        allSame = True
-        for column in row:
-            if column != letter:
-                allSame = False
-        if allSame:
-            return True
-    for column in range(3):
-        allSame = True
-        for row in board:
-            if row[column] != letter:
-                allSame = False
-        if allSame:
-            return True
-    allSame = True
-    for index in range(3):
-        if not board[index][index] == letter:
-            allSame = False
-    if allSame:
-        return True
-    allSame = True
-    for index in range(3):
-        if not board[index][2 - index] == letter:
-            allSame = False
-    if allSame:
-        return True
-    return False
-def endGame(board):
-    if threeInARow(board, "X"):
-        print("X Wins!")
-        printBoard(board)
-        exit()
-    if threeInARow(board, "O"):
-        print("O Wins!")
-        printBoard(board)
-        exit()
-    allFull = True
-    for row in board:
-        for column in row:
-            if column == " ":
-                allFull = False
-    if allFull:
-        print("Cat wins!")
-        printBoard(board)
-        exit()
-print("Hello! Welcome to tic-tac-toe! You will be X.")
-while True:
-    playerRow = int(input("Which row would you like to go in?"))
-    playerColumn = int(input("Which column would you like to go in?"))
-    if not turn(playerRow, playerColumn, "X"):
-        print("Oops! Try again! Idiot.")
-        continue
-    endGame(board)
-    while True:
-        compRow = random.randint(1, 3)
-        compColumn = random.randint(1, 3)
-        if turn(compRow, compColumn, "O"):
-            endGame(board)
-            break
-        else:
-            continue
-    printBoard(board) */
+    for (int i = 0; i < 3; i++) {
+        all_same = true;
+        for (int j = 0; j < size(board); j++) {
+            if (board[j][i] != letter) {
+                all_same = false;
+            }
+        }
+        if (all_same) {
+            return true;
+        }
+    }
+
+    all_same = true;
+    for (int i = 0; i < 3; i++) {
+        if (board[i][i] != letter) {
+            all_same = false;
+        }
+    }
+    if (all_same) {
+        return true;
+    }
+
+    all_same = true;
+    for (int i = 0; i < 3; i++) {
+        if (board[i][i-2] != letter) {
+            all_same = false;
+        }
+    }
+    if (all_same) {
+        return true;
+    }
+    return false;
+
+}
+
+void end_game() {
+    if (three_in_a_row("X")) {
+        cout << "X Wins!\n";
+        print_board();
+        exit(0);
+    }
+    if (three_in_a_row("O")) {
+        cout << "O Wins!\n";
+        print_board();
+        exit(0);
+    }
+    bool full = true;
+    for (int i = 0; i < size(board); i++) {
+        for (int j = 0; j < size(board[i]); j++) {
+            if (board[i][j] == " ") {
+                full = false;
+            }
+        }
+    }
+    if (full) {
+        cout << "Cat Wins :(\n";
+        print_board();
+        exit(0);
+    }
+}
+
+int main() {
+    srand(time(nullptr));
+    cout << "Hello! Welcome to tic-tac-toe! You will play as X.\n";
+    print_board();
+    while (true) {
+        int play_row;
+        cout << "Which row would you like to play in?\n";
+        cin >> play_row;
+        int play_col;
+        cout << "Which column would you like to play in?\n";
+        cin >> play_col;
+        if (!turn(play_row, play_col, "X")) {
+            cout << "That spot is taken, please try again!\n";
+            continue;
+        }
+        end_game();
+        while (true) {
+            int com_row = (rand() * 6) % 3;
+            int com_col = (rand() * 45) % 3;
+            if (turn(com_row, com_col, "O")) {
+                end_game();
+                break;
+            }
+            else {
+                continue;
+            }
+        }
+        print_board();
+    }
+    return 0;
+}
