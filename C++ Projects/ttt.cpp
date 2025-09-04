@@ -49,9 +49,9 @@ bool three_in_a_row(string letter) {
             if (board[i][j] != letter) {
                 all_same = false;
             }
+        }
         if (all_same) {
             return true;
-        }
         }
     }
 
@@ -79,7 +79,7 @@ bool three_in_a_row(string letter) {
 
     all_same = true;
     for (int i = 0; i < 3; i++) {
-        if (board[i][i-2] != letter) {
+        if (board[i][2-i] != letter) {
             all_same = false;
         }
     }
@@ -118,23 +118,35 @@ void end_game() {
 
 int main() {
     srand(time(nullptr));
-    cout << "Hello! Welcome to tic-tac-toe! You will play as X.\n";
+    cout << "Hello! Welcome to tic-tac-toe! You will play as X.\nThe first player to get 3 of their letter in a row, column or diagonal wins!\n";
     print_board();
     while (true) {
         int play_row;
         cout << "Which row would you like to play in?\n";
         cin >> play_row;
+        if (play_row < 1 || play_row > 3) {
+            cout << "Please enter a row between 1 and 3.\n";
+            cin.clear();
+            cin.ignore(50,'\n');
+            continue;
+        }
         int play_col;
         cout << "Which column would you like to play in?\n";
         cin >> play_col;
+        if (play_col < 1 || play_col > 3) {
+            cout << "Please enter a column between 1 and 3.\n";
+            cin.clear();
+            cin.ignore(50,'\n');
+            continue;
+        }
         if (!turn(play_row, play_col, "X")) {
             cout << "That spot is taken, please try again!\n";
             continue;
         }
         end_game();
         while (true) {
-            int com_row = (rand() * 6) % 3;
-            int com_col = (rand() * 45) % 3;
+            int com_row = (rand() % 3) + 1;
+            int com_col = (rand() % 3) + 1;
             if (turn(com_row, com_col, "O")) {
                 end_game();
                 break;
