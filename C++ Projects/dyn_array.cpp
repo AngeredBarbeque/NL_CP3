@@ -31,6 +31,7 @@ void ask() {
             colors = temp;
         }
     }
+    //Prints list items
     for (int i = 0; i < entries; i++)
         cout << colors[i] << endl;
 }
