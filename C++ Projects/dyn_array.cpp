@@ -8,8 +8,12 @@ int main() {
     while (true) {
     cout << "You will be asked to enter as many colors as possible. When you cannot list any more colors, please enter \"0\"" << endl;
     cout << "Would you like to continue? y/n:";
-    string continue;
-    cin >> 
+    string confirm;
+    cin >> confirm;
+    if (confirm == "n") {
+        cout << "Goodbye!";
+        exit(0);
+    }
     //Creates a variable that tracks the current capacity of the array
     int capacity = 1;
     //Makes a unique pointer called colors pointing to a new string
