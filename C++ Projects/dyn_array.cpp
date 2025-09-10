@@ -10,6 +10,7 @@ int main() {
     cout << "Would you like to continue? y/n:";
     string confirm;
     cin >> confirm;
+    cin.ignore();
     if (confirm == "n") {
         cout << "Goodbye!";
         exit(0);
@@ -22,10 +23,8 @@ int main() {
     int entries = 0;
 
     while (true) {
-        string input;
         cout << "Color:";
-        cin >> colors[entries];
-        getline(cin, input);
+        getline(cin, colors[entries]);
         if (colors[entries] == "0")
             break;
         entries++;
