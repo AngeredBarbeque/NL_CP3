@@ -1,25 +1,27 @@
-//NL Structures
-
-//What are structures?
-//A structure is a custom data type. It is an abstract data type, aka ADT.
-
-//How do you build a structure?
-//struct Movie {
-//    string title;
-//    int releaseYear = 0;
-//    bool isPopular = true;
-
-//};
-
-//What can be held in a structure?
-// Properties for objects based on the structure.
-
-//How do you access the information in a structure?
-//Using object_name.propertyName
-
-//How do you overload an operator?
-//
-
+/*
+NL Structures
+What are structures?
+A structure is a custom data type. It is an abstract data type, aka ADT.
+How do you build a structure?
+struct Movie {
+    string title;
+    int releaseYear = 0;
+    bool isPopular = true;
+};
+What can be held in a structure?
+ Properties for objects based on the structure.
+How do you access the information in a structure?
+Using object_name.propertyName
+How do you overload an operator?
+bool operator==(const Movie& first, const Movie& second){
+        return(first.title == second.title && 
+            first.releaseDate.year == second.releaseDate.year &&
+            first.releaseDate.month == second.releaseDate.month &&
+            first.releaseDate.day == second.releaseDate.day &&
+            first.isPopular == second.isPopular
+        )
+    }
+*/
 
 #include <iostream>
 #include <string>
@@ -37,18 +39,6 @@ struct Movie {
     string title;
     Date releaseDate;
     bool isPopular = true;
-    bool == (const Movie& movie){
-        if (title == movie.title && 
-            releaseDate.year == movie.releaseDate.year &&
-            releaseDate.month == movie.releaseDate.month &&
-            releaseDate.day == movie.releaseDate.day &&
-            isPopular == movie.isPopular
-        ) {
-        return true;
-    }else{
-        return false;
-    }
-    }
 };
 
 struct Customer {
@@ -56,6 +46,24 @@ struct Customer {
     int id;
     string email;
 };
+
+bool operator==(const Movie& first, const Movie& second){
+        return (first.title == second.title && 
+            first.releaseDate.year == second.releaseDate.year &&
+            first.releaseDate.month == second.releaseDate.month &&
+            first.releaseDate.day == second.releaseDate.day &&
+            first.isPopular == second.isPopular
+        );
+    }
+
+ostream& operator << (ostream& stream, Movie& movie){
+    stream << movie.title;
+    return stream;
+}
+
+void showMovie(Movie* movie) {
+    cout << movie -> title << endl;
+}
 
 int main(){
     vector<Movie> movies;
@@ -76,6 +84,7 @@ int main(){
 
     Movie terminator = {"Terminator", {1984, 6, 1}};
     Movie terminator_two = {"Terminator 2", {1987}};
+    showMovie(&terminator);
 
 
     //auto [title, releaseYear, isPopular] {terminator};
@@ -85,5 +94,9 @@ int main(){
         cout << "Movie Year: " << releaseDate.year << endl;
         cout << "Popular? " << isPopular << endl;
     }
-    cout << terminator == terminator_two << endl;
+    if (terminator == terminator_two)
+        cout << terminator << " is equal to " << terminator_two << endl;
+    else{
+        cout << terminator << " is not " << terminator_two << endl;
+    }
 }
