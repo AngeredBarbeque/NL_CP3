@@ -25,7 +25,8 @@ ostream& operator << (ostream& stream, User& user){
     return stream;
 }
 
-User make_list () {
+vector<User> make_list () {
+    vector<User> users;
     User luke;
     luke.username = "luke.murdock";
     luke.password = "nick.larsen";
@@ -66,5 +67,71 @@ User make_list () {
     beansprout.username = "luke.murdock";
     beansprout.password = "nick.larsen";
     beansprout.admin = false;
-    User users[10] = {luke,darius,vincent,cecily,alex,tate,jonas,nick,fleshboy,beansprout}
+    users.push_back(luke);
+    users.push_back(darius);
+    users.push_back(vincent);
+    users.push_back(cecily);
+    users.push_back(alex);
+    users.push_back(tate);
+    users.push_back(jonas);
+    users.push_back(nick);
+    users.push_back(fleshboy);
+    users.push_back(beansprout);
+    return users;
+    
+}
+
+bool check (vector<User>& users, User& new_user) {
+    for (auto user: users) {
+        if (user == new_user) {
+            return true;
+        }
+    }
+    return false;
+}
+
+int main() {
+    cout << "Welcome!" << endl;
+    while (true) {
+        cout << "Would you like to continue? y/n:";
+        string confirm;
+        cin >> confirm;
+        cin.ignore();
+        if (confirm != "y") {
+            cout << "Goodbye!";
+            exit(0);
+        }
+        string entered_username;
+        string entered_password;
+        string entered_admin;
+        vector<User> users = make_list();
+        cout << "Please enter your username!" << endl << "Username: ";
+        cin >> entered_username;
+        cin.ignore();
+        cout << "Password: ";
+        cin >> entered_password;
+        cin.ignore();
+        cout << "Are you an admin? Y or N?: ";
+        cin >> entered_admin;
+        cin.ignore();
+        entered_admin = toupper(entered_admin[0]);
+        User new_user;
+        new_user.username = entered_username;
+        new_user.password = entered_password;
+        cout << "Username: " << new_user.username << endl;
+        cout << "Password: " << new_user.password << endl;
+        if (entered_admin == "Y") {
+            cout << "Admin: Yes" << endl;
+            new_user.admin = true;
+        } else {
+            cout << "Admin: No" << endl;
+            new_user.admin = false;
+        }
+
+        if (check (users, new_user)) {
+            cout << "Already exists." << endl;
+        }else {
+            cout << "Welcome new user!" << endl;
+        }
+    }
 }
