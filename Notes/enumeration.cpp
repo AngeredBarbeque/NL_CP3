@@ -20,7 +20,7 @@ Why does it matter that enumerators are constants?
 So that we don't accidentally change the values.
 
 What is the default beginning enumerator? 
-0
+0,1,2,3,etc
 
 How do you give a different default value?
 enum Action{
