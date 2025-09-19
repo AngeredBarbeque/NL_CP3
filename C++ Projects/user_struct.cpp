@@ -41,7 +41,7 @@ vector<User> make_list () {
     vincent.admin = true;
     User cecily;
     cecily.username = "Cinnamon";
-    cecily.password = "Worchestshire but backwards";
+    cecily.password = "Worcestshire but backwards";
     cecily.admin = false;
     User alex;
     alex.username = "Aeiros";
