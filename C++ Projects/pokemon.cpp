@@ -21,6 +21,12 @@ enum Main {
     Exit
 };
 
+enum Battle {
+    attack_1,
+    attack_2,
+    attack_3
+};
+
 //An array of arrays, each smaller array has 2 parts
 //Attacking type, Defending Type
 
@@ -117,14 +123,82 @@ void catching(vector<Pokemon> owned, vector<Pokemon> species) {
     }
 }
 
-void battle(vector<Pokemon> owned, vector<Pokemon> species) {
+vector<Pokemon> battle(vector<Pokemon> owned, vector<Pokemon> species) {
     Pokemon opponent = species[random(5)];
     string trainer = names[random(10)];
     cout << "You encountered " << trainer << "!\n << They send out a " << opponent.name << "!\n";
+    cout << "Please select your POKEMAN" << endl;
+    int num = 0;
     int choice;
-    CREATE IF HERE
+    for (Pokemon i:owned) {
+        cout << num << ": Level " << i.level << " " << i.name << endl;
+        num++;
+    }
+    cin >> choice;
+    Pokemon chosen = owned[choice];
+    vector<Attack> chosen_attacks = chosen.attacks;
+    int used_attack_num;
+    while (chosen.cur_hp > 0) {
+        if (play_turn(chosen, used_attack_num, chosen_attacks, opponent)) {
+            cout << "You won!\n";
+            owned[choice].level += 1;
+            owned[choice].max_hp * 2;
+            return owned;
+        }
+        if (com_turn(opponent, com_attacks, chosen)) {
+            cout << "You lose!\n";
+        }
+    }
 }
 
+bool play_turn (Pokemon chosen, int used_attack_num, vector<Attack> chosen_attacks, Pokemon opponent) {
+    cout << "Your turn!\n Select a move!\n";
+        cout << "1: " << chosen_attacks[0].name << endl;
+        cout << "2: " << chosen_attacks[1].name << endl;
+        cout << "3: " << chosen_attacks[2].name << endl;
+        cin >> used_attack_num;
+        Attack used_attack = chosen_attacks[used_attack_num];
+        int true_damage = used_attack.damage;
+        for (int i = 0; i < 7; i++) {
+            if (type_strong[i][0] == used_attack.type && type_strong[i][1] == opponent.type) {
+                true_damage *= 2;
+            }
+        }
+
+        for (int i = 0; i < 8; i++) {
+            if (type_weak[i][0] == used_attack.type && type_weak[i][1] == opponent.type) {
+                true_damage /= 2;
+            }
+        }
+
+        cout << opponent.name << " took " << true_damage << " damage!\n";
+        opponent.cur_hp -= true_damage;
+        if (opponent.cur_hp <= 0) {
+            return true;
+        }
+        return false;
+}
+
+bool com_turn (Pokemon chosen, vector<Attack> chosen_attacks, Pokemon opponent) {
+    Attack used_attack = chosen_attacks[(random(3) + 1)];
+    int true_damage = used_attack.damage;
+        for (int i = 0; i < 7; i++) {
+            if (type_strong[i][0] == used_attack.type && type_strong[i][1] == opponent.type) {
+                true_damage *= 2;
+            }
+        }
+        for (int i = 0; i < 8; i++) {
+            if (type_weak[i][0] == used_attack.type && type_weak[i][1] == opponent.type) {
+                true_damage /= 2;
+            }
+        }
+        cout << opponent.name << " took " << true_damage << " damage!\n";
+        opponent.cur_hp -= true_damage;
+        if (opponent.cur_hp <= 0) {
+            return true;
+        }
+        return false;
+}
 
 int main() {
     vector<Pokemon> species = make_pokemon(); 
