@@ -7,7 +7,7 @@
 using namespace std;
 
 enum Start {
-    Smithijon,
+    Smithijon = 1,
     Pyro,
     Cod,
     Otto,
@@ -15,14 +15,14 @@ enum Start {
 };
 
 enum Main {
-    Fight,
+    Fight = 1,
     Search,
     Heal,
     Exit
 };
 
 enum Battle {
-    attack_1,
+    attack_1 = 1,
     attack_2,
     attack_3
 };
@@ -50,6 +50,10 @@ struct Pokemon {
     int level;
     string type;
 };
+
+bool operator==(const Pokemon& first, const Pokemon& second) {
+    return (first.name == first.name);
+}
 
 vector<Pokemon> make_pokemon() {
     vector<Attack> smith_attacks;
@@ -99,55 +103,32 @@ int random(int range) {
     return my_num;
 }
 
-void catching(vector<Pokemon> owned, vector<Pokemon> species) {
+vector<Pokemon> catching(vector<Pokemon> owned, vector<Pokemon> species) {
     Pokemon opponent = species[random(5)];
     int choice;
-    cout << "You encountered a " << opponent.name << "!\n What would you like to do?";
+    cout << "You encountered a " << opponent.name << "!\n What would you like to do?\n";
     cout << "1: Catch it\n";
-    cout << "2: Run away";
+    cout << "2: Run away\n";
     cin >> choice;
-    if (choice == '1') {   
+    if (choice == 1) {   
         cout << "You threw a POKEDODECAHEDRON!\n";
         if (random(5) == 0) {
             cout << "You caught it!\n";
+            for (Pokemon i : owned) {
+                if (i == opponent) {
+                    return owned;
+                }
+            }
             owned.push_back(opponent);
-            return;
+            return owned;
         }
         else {
             cout << opponent.name << " ran away! :(\n";
-            return;
+            return owned;
         }
     }else {
         cout << "You ran away!\n";
-        return;
-    }
-}
-
-vector<Pokemon> battle(vector<Pokemon> owned, vector<Pokemon> species) {
-    Pokemon opponent = species[random(5)];
-    string trainer = names[random(10)];
-    cout << "You encountered " << trainer << "!\n << They send out a " << opponent.name << "!\n";
-    cout << "Please select your POKEMAN" << endl;
-    int num = 0;
-    int choice;
-    for (Pokemon i:owned) {
-        cout << num << ": Level " << i.level << " " << i.name << endl;
-        num++;
-    }
-    cin >> choice;
-    Pokemon chosen = owned[choice];
-    vector<Attack> chosen_attacks = chosen.attacks;
-    int used_attack_num;
-    while (chosen.cur_hp > 0) {
-        if (play_turn(chosen, used_attack_num, chosen_attacks, opponent)) {
-            cout << "You won!\n";
-            owned[choice].level += 1;
-            owned[choice].max_hp * 2;
-            return owned;
-        }
-        if (com_turn(opponent, com_attacks, chosen)) {
-            cout << "You lose!\n";
-        }
+        return owned;
     }
 }
 
@@ -157,7 +138,7 @@ bool play_turn (Pokemon chosen, int used_attack_num, vector<Attack> chosen_attac
         cout << "2: " << chosen_attacks[1].name << endl;
         cout << "3: " << chosen_attacks[2].name << endl;
         cin >> used_attack_num;
-        Attack used_attack = chosen_attacks[used_attack_num];
+        Attack used_attack = chosen_attacks[used_attack_num - 1];
         int true_damage = used_attack.damage;
         for (int i = 0; i < 7; i++) {
             if (type_strong[i][0] == used_attack.type && type_strong[i][1] == opponent.type) {
@@ -170,7 +151,7 @@ bool play_turn (Pokemon chosen, int used_attack_num, vector<Attack> chosen_attac
                 true_damage /= 2;
             }
         }
-
+        cout << chosen.name << " used " << used_attack.name << "!\n";
         cout << opponent.name << " took " << true_damage << " damage!\n";
         opponent.cur_hp -= true_damage;
         if (opponent.cur_hp <= 0) {
@@ -192,12 +173,52 @@ bool com_turn (Pokemon chosen, vector<Attack> chosen_attacks, Pokemon opponent) 
                 true_damage /= 2;
             }
         }
+        cout << chosen.name << " used " << used_attack.name << "!\n";
         cout << opponent.name << " took " << true_damage << " damage!\n";
         opponent.cur_hp -= true_damage;
         if (opponent.cur_hp <= 0) {
             return true;
         }
         return false;
+}
+
+vector<Pokemon> battle(vector<Pokemon> owned, vector<Pokemon> species) {
+    Pokemon opponent = species[random(5)];
+    if (random(2) == 0) {
+        string trainer = names[random(10)];
+        cout << "You encountered " << trainer << "!\n They send out a " << opponent.name << "!\n";
+    } else {
+        cout << "You encountered a wild " << opponent.name << "!\n";
+    }
+    cout << "Please select your POKEMAN" << endl;
+    int num = 0;
+    int choice;
+    vector<Pokemon> already;
+    bool same = false;
+    for (Pokemon i:owned) {
+        cout << (num + 1) << ": Level " << i.level << " " << i.name << endl;
+        already.push_back(i);
+        num++;
+    }
+    cin >> choice;
+    choice -= 1;
+    Pokemon chosen = owned[choice];
+    vector<Attack> com_attacks = opponent.attacks;
+    vector<Attack> chosen_attacks = chosen.attacks;
+    int used_attack_num;
+    while (true) {
+        if (play_turn(chosen, used_attack_num, chosen_attacks, opponent)) {
+            cout << "You won!\n";
+            owned[choice].level += 1;
+            owned[choice].max_hp * 2;
+            return owned;
+        }
+        if (com_turn(opponent, com_attacks, chosen)) {
+            cout << "You lose!\n";
+            owned[choice].cur_hp = 0;
+            return owned;
+        }
+    }
 }
 
 int main() {
@@ -215,14 +236,19 @@ int main() {
         cin >> start_choice;
         if (start_choice == Start::Smithijon) {
             owned.push_back(species[0]);
+            break;
         }else if (start_choice == Start::Pyro) {
             owned.push_back(species[1]);
+            break;
         }else if (start_choice == Start::Cod) {
             owned.push_back(species[2]);
+            break;
         }else if (start_choice == Start::Otto) {
             owned.push_back(species[3]);
+            break;
         }else if (start_choice == Start::Dracula) {
             owned.push_back(species[4]);
+            break;
         }else {
             cout << "Please enter a valid number.\n";
             continue;
@@ -231,21 +257,21 @@ int main() {
     cout << "Yay! " << owned[0].name << " has joined your party!\n";
     int choice;
     while (true) {
-        cout << "What would you like to do?";
-        cout << "1: Fight";
-        cout << "2: Search";
-        cout << "3: Heal";
-        cout << "4: Exit";
+        cout << "What would you like to do?\n";
+        cout << "1: Fight\n";
+        cout << "2: Search\n";
+        cout << "3: Heal\n";
+        cout << "4: Exit\n";
         cin >> choice;
         if (choice == Main::Fight) {
-            
+            owned = battle(owned, species);
         } else if (choice == Main::Search) {
-
-
+            owned = catching(owned, species);
         } else if (choice == Main::Heal) {
             for (Pokemon i : owned) {
+                cout << i.max_hp;
                 i.cur_hp = i.max_hp;
-                cout << i.name << " has been healed to " << i.cur_hp << "!\n";
+                cout << i.name << " has been healed to " << i.max_hp << "!\n";
             }
             continue;
         } else if (choice == Main::Exit) { 
