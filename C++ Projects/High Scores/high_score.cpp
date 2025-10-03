@@ -27,11 +27,14 @@ ostream& operator << (ostream& stream, Date& date){
     return stream;
 }
 
-void writeScore(Highscore& score) {
+void writeScore(Highscore& score, vector<Highscore>& scores) {
     ofstream file;
     file.open("scores.csv");
     if(file.is_open()){
-        file << "name,score,date\n" << score.username << ',' << score.score << ',' << score.date.day << '/' << score.date.month << '/' << score.date.year;
+        file << "name,score,date\n" << score.username << ',' << score.score << ',' << score.date.day << '/' << score.date.month << '/' << score.date.year << '\n';
+        for (Highscore i : scores) {
+            file << i.username << ',' << i.score << ',' << i.date.day << '/' << i.date.month << '/' << i.date.year << '\n';
+        }
         file.close();
     }
 };
@@ -45,7 +48,7 @@ Highscore getScore() {
     Highscore score;
     while (true) {
         cout << "Please enter your username!\n";
-        cin >> score.username;
+        getline(cin, score.username);
         if (cin.fail()) {
             cout << "Invalid input.\n";
             cin.clear();
@@ -60,6 +63,8 @@ Highscore getScore() {
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             continue;
         }
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cout << "Please enter your day as a number!\n";
         cin >> score.date.day;
         if (cin.fail() || score.date.day > 31) {
@@ -68,6 +73,8 @@ Highscore getScore() {
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             continue;
         }
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cout << "Please enter your month as a number!\n";
         cin >> score.date.month;
         if (cin.fail() || score.date.month > 12) {
@@ -76,6 +83,8 @@ Highscore getScore() {
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             continue;
         }
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cout << "Please enter your year as a number!\n";
         cin >> score.date.year;
         if (cin.fail()) {
@@ -84,6 +93,8 @@ Highscore getScore() {
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             continue;
         }
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         return score;
     }
 }
@@ -116,18 +127,22 @@ vector<Highscore> readScores() {
         }
     ifile.close();
     }
+    //A built in function that sorts
+    //In this case, it goes through the vector "scores", and sorts starting with the first and ending at the final
+    sort(scores.begin(), scores.end(), sortScores);
     return scores;
 }
 
 int main() {
     vector<Highscore> scores = readScores();
-    sort(scores.begin(), scores.end(), sortScores);
     cout << "Welcome to your high score tracker!\n";
     while (true) {
         scores = readScores();
         string input;
         cout << "What would you like to do?\n1: View Previous Highscores\n2: Add Highscore\n3: Leave\n";
         cin >> input;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         if (input == "1") {
             scores = readScores();
             cout << "Username | Score | Date" << endl;
@@ -136,10 +151,7 @@ int main() {
             }
         }else if (input == "2") {
             Highscore score = getScore();
-            writeScore(score);
-            //A built in function that sorts
-            //In this case, it goes through the vector "scores", and sorts starting with the first and ending at the final
-            sort(scores.begin(), scores.end(), sortScores);
+            writeScore(score, scores);
         }else if (input == "3") {
             cout << "Bye!";
             return 0;
