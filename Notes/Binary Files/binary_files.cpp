@@ -99,33 +99,41 @@ When a title contains a space, which function should you use to read it properly
 getline
 
 Why might extra zeros be added to a string when converting a value without control?
-
+Because it's filling in for the extra saved space.
+Effectively there are implied zeroes in a float or integer that are converted to a string
 
 How does controlling the string conversion process benefit your program?
-
+It allows us more control over the format of our strings.
 
 Give an example scenario where parsing a string would be necessary in a program.
-
+A user enters both intended inputs on one line, or pulling information from text/csv files
 
 When writing to a binary file, what does the first parameter (reinterpret_cast<char*>(&numbers)) represent?
-
+Converting information to/from binary
 
 Why does the binary file only take 12 bytes while the array of integers might be larger?
-
+Once it's in binary as 1s and 0s, the data used to determine data types no longer needs to be stored.
 
 What is the main difference between sequential search and binary search?
-
+Sequential goes through each number 1 at a time, while binary narrows down the options slower. 
 
 In which type of data structure is binary search most efficient?
-
+Large sets of ordered information
 
 What is a key requirement for binary search to work correctly on a list?
-
+The list must be ordered/sorted
 
 How does sequential search find an item in a list?
-
+Starting at index zero, checks each item to see if it matches
+Looking for: 9
+1, 3, 5, 7, 9
+X  X  X  X  O
+Big O notation
+O subscript n^2
+n is the amount of items
+for 5 items, takes 25 milliseconds.
 
 Why is binary search generally faster than sequential search for large, sorted lists?
-
+Sequential search gets exponentially bigger the larger the list, while binary doesn't.
 
 */
