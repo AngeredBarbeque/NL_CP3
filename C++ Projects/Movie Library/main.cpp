@@ -19,10 +19,10 @@ struct Movie{
 };
 
 bool operator!=(const Movie& first, const Movie& second) {
-    return (first.title != second.title && 
-            first.director != second.director && 
-            first.year != second.year &&
-            first.genre != second.genre &&
+    return (first.title != second.title ||
+            first.director != second.director || 
+            first.year != second.year ||
+            first.genre != second.genre ||
             first.rating != second.rating);
 }
 
@@ -45,8 +45,10 @@ vector<Movie> readMovie() {
 
             getline(iss, str, ',');
             film.year = stoi(str);
+
             getline(iss, str, ',');
             film.genre = str;
+
             getline(iss, str);
             film.rating = str;
 
@@ -60,6 +62,7 @@ vector<Movie> readMovie() {
 void removeMovie(Movie film, vector<Movie> &movies ) {
     ofstream ofile;
     ofile.open(file);
+    ofile << "Movie Name,Director,Year,Genre,Rating\n";
     for (Movie i : movies) {
         if (i != film) {
             ofile << i.title << ',' << i.director << ',' << i.year << ',' << i.genre << ',' << i.rating << '\n';
@@ -77,74 +80,59 @@ void writeMovie(Movie film) {
 
 Movie movieInput() {
     Movie film;
+    cin.clear();
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
     while (true) {
         cout << "Please enter the movie title.\n";
         getline(cin, film.title);
         if (cin.fail()) {
             cout << "Invalid input.\n";
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
             continue;
         }
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cout << "Please enter the director.\n";
         getline(cin, film.director);
         if (cin.fail()) {
             cout << "Invalid input.\n";
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
             continue;
         }
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cout << "Please enter the movie's release year.\n";
-        cin >> film.year;
-        if (cin.fail()) {
+        string str_year;
+        getline(cin,str_year);
+        film.year = atoi(str_year.c_str());
+        if (cin.fail() || film.year <= 0) {
             cout << "Invalid input.\n";
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
             continue;
         }
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cout << "Please enter the movie's genre.\n";
         cin >> film.genre;
         if (cin.fail()) {
             cout << "Invalid input.\n";
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
             continue;
         }
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cout << "Please enter the movie's rating.\n";
         cin >> film.rating;
         if (cin.fail()) {
             cout << "Invalid input.\n";
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
             continue;
         }
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         return film;
     }
 }
 
-void searchMovies(vector<Movie> movies) {
+void searchMovies(vector<Movie> &movies) {
     vector<Movie> searchedMovies;
     string searchBy;
     while (true) {
-    cout << "What would you like to search by?\n1: Title\n2: Director\n3: Year\n4: Genre\n5: Rating\n6: Exit" << endl;
-    cin >> searchBy;
+        cout << "What would you like to search by?\n1: Title\n2: Director\n3: Year\n4: Genre\n5: Rating\n6: Exit" << endl;
+        cin >> searchBy;
     if (cin.fail()) {
         cout << "Invalid input.\n";
         continue;
     }else if (searchBy == "1") {
         string title;
         cout << "Please enter the movie title.\n";
-        cin >> title;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         getline(cin, title);
         if (cin.fail()) {
             cout << "Invalid input.\n";
@@ -153,14 +141,18 @@ void searchMovies(vector<Movie> movies) {
             continue;
         }
         for (Movie i : movies) {
-            if (i.title == title) {
+            int idx = i.title.find(title);
+            //Checks if the index actually exists
+            if (idx != string::npos) {
                 searchedMovies.push_back(i);
             }
         }
     }else if (searchBy == "2") {
         string director;
         cout << "Please enter the movie director.\n";
-        cin >> director;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        getline(cin, director);
         if (cin.fail()) {
             cout << "Invalid input.\n";
             cin.clear();
@@ -168,7 +160,9 @@ void searchMovies(vector<Movie> movies) {
             continue;
         }
         for (Movie i : movies) {
-            if (i.director == director) {
+            cout << i.director << " in " << director << "?\n";
+            int idx = i.director.find(director);
+            if (idx != string::npos) {
                 searchedMovies.push_back(i);
             }
         }
@@ -190,7 +184,9 @@ void searchMovies(vector<Movie> movies) {
     }else if (searchBy == "4") {
         string genre;
         cout << "Please enter the movie genre.\n";
-        cin >> genre;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        getline(cin, genre);
         if (cin.fail()) {
             cout << "Invalid input.\n";
             cin.clear();
@@ -198,14 +194,17 @@ void searchMovies(vector<Movie> movies) {
             continue;
         }
         for (Movie i : movies) {
-            if (i.genre == genre) {
+            int idx = i.genre.find(genre);
+            if (idx != string::npos) {
                 searchedMovies.push_back(i);
             }
         }
     }else if (searchBy == "5") {
         string rating;
         cout << "Please enter the movie's age rating.\n";
-        cin >> rating;
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        getline(cin, rating);
         if (cin.fail()) {
             cout << "Invalid input.\n";
             cin.clear();
@@ -213,21 +212,22 @@ void searchMovies(vector<Movie> movies) {
             continue;
         }
         for (Movie i : movies) {
-            if (i.rating == rating) {
+            int idx = i.rating.find(rating);
+            if (idx != string::npos) {
                 searchedMovies.push_back(i);
             }
         }
-    }else if (searchBy == "5") {
+    }else if (searchBy == "6") {
         return;
     }else {
         cout << "Invalid input.\n";
     }
-    cout << "Found " << size(movies) << " movies";
-    if (size(movies) == 0) {
+    cout << "Found " << size(searchedMovies) << " movies\n";
+    if (size(searchedMovies) == 0) {
         cout << "Sorry, I couldn't find anything. Please check your spelling and capitalization.\n";
         continue;
     }
-    for (Movie i : movies) {
+    for (Movie i : searchedMovies) {
         cout << "Title: " << i.title << "\nDirected by: " << i.director << "\nRelease Year: " << i.year << "\nGenre: " << i.genre << "\nAge Rating: " << i.rating << endl;
     }
     return;
