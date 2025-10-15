@@ -23,13 +23,13 @@
 #                self.name == other.name)
 
 # What are test cases?
-#
+# A function that checks that your code meets certain conditions.
 
 # Why do we use test cases?
 # to make sure we don't break our code, help us to write preloaded cases to ensure things work as intended
 
 # How do we create test cases?
-# Create tests in seperate files!
+# Create tests in seperate files, using assert keyword to check things.
 
 class Animal():
 
