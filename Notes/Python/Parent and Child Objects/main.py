@@ -31,6 +31,9 @@
 # How do we create test cases?
 # Create tests in seperate files, using assert keyword to check things.
 
+# Polymorphism 
+#Changing things between parent and child classes
+
 class Animal():
 
     def __init__(self, age, color):
