@@ -1,5 +1,7 @@
 from dessert import *
 
+#Creates an order object containing instances of all child/grandchild classes
+#Prints each item in the order, and then prints the length of it
 def main():
     order = Order()
     gummy = Candy("Gummy Bears", 1.5, 0.25)
