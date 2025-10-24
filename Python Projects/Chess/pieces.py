@@ -1,9 +1,10 @@
 from abc import ABC, abstractmethod
 
 class Position():
-    def __init__(self, col, row):
-        self.col == col
-        self.row == row
+    def __init__(self, col, row, sym=" "):
+        self.col = col
+        self.row = row
+        self.sym = sym
     def hor(self, pos):
         if self.row == pos.row:
             return True
