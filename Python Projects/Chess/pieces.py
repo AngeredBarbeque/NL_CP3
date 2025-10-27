@@ -57,6 +57,9 @@ class Pawn(ChessPiece):
             return False
     def symbol(self):
         return "p"
+    def move(self,new_pos):
+        new_pos.symbol = self.symbol()
+        self.pos = new_pos
     
 class Rook(ChessPiece):
     def __init__(self, color, pos):
@@ -68,6 +71,9 @@ class Rook(ChessPiece):
             return False
     def symbol(self):
         return "r"
+    def move(self,new_pos):
+        new_pos.symbol = self.symbol()
+        self.pos = new_pos
 
 class Knight(ChessPiece):
     def __init__(self, color, pos):
@@ -79,6 +85,9 @@ class Knight(ChessPiece):
             return False
     def symbol(self):
         return "k"
+    def move(self,new_pos):
+        new_pos.symbol = self.symbol()
+        self.pos = new_pos
 
 class Bishop(ChessPiece):
     def __init__(self, color, pos):
@@ -90,6 +99,9 @@ class Bishop(ChessPiece):
             return False
     def symbol(self):
         return "b"
+    def move(self,new_pos):
+        new_pos.symbol = self.symbol()
+        self.pos = new_pos
 
 class Queen(ChessPiece):
     def __init__(self, color, pos):
@@ -101,6 +113,9 @@ class Queen(ChessPiece):
             return False
     def symbol(self):
         return "Q"
+    def move(self,new_pos):
+        new_pos.symbol = self.symbol()
+        self.pos = new_pos
     
 class King(ChessPiece):
     def __init__(self, color, pos):
@@ -112,3 +127,6 @@ class King(ChessPiece):
             return False
     def symbol(self):
         return "K"
+    def move(self,new_pos):
+        new_pos.symbol = self.symbol()
+        self.pos = new_pos
