@@ -7,24 +7,36 @@ def test_defaults():
     assert test.scoops == 0
     assert test.topping == ""
     assert test.topping_price == 0
+    assert test.tax_percent == 7.25
+    assert test.calculateCost() == 0.0
+    assert test.calculateTax() == 0
 
 def test_set():
-    test = Sundae("Test",1,2,"Topping",3)
+    test = Sundae("Test",4,1,2,"Topping",3)
     assert test.name == "Test"
     assert test.price_per_scoop == 1
     assert test.scoops == 2
     assert test.topping == "Topping"
     assert test.topping_price == 3
+    assert test.tax_percent == 4
+    assert test.calculateCost() == 6
+    assert test.calculateTax() == 0.24
+
+
 
 def test_change():
-    test = Sundae("Test",1,2,"Topping",3)
+    test = Sundae("Test",4,1,2,"Topping",3)
     test.name = "Test 2"
     test.price_per_scoop = 2
     test.scoops = 3
     test.topping = "Topping 2"
     test.topping_price = 4
+    test.tax_percent = 5
     assert test.name == "Test 2"
     assert test.price_per_scoop == 2
     assert test.scoops == 3
     assert test.topping == "Topping 2"
     assert test.topping_price == 4
+    assert test.tax_percent == 5
+    assert test.calculateCost() == 10
+    assert test.calculateTax() == 0.5
