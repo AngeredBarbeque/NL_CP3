@@ -29,9 +29,35 @@ class DessertShop():
             return Candy(name, tax, price_per_pound, amount)
 
     def user_prompt_cookie(self):
-        pass
+        while True:
+            name = input("What is the name of your cookie?\n")
+            tax = input("What is the tax percent?\n")
+            if not self.check_int(tax):
+                continue
+            price_per_dozen = input("What is the price per dozen of your cookie?\n")
+            if not self.check_int(price_per_dozen):
+                continue
+            amount = input("How many cookies would you like?\n")
+            if not self.check_int(amount):
+                continue
+
+            return Cookies(name, tax, price_per_dozen, amount)
+        
     def user_prompt_icecream(self):
-        pass
+        while True:
+            name = input("What is the name of your ice cream?\n")
+            tax = input("What is the tax percent?\n")
+            if not self.check_int(tax):
+                continue
+            price_per_scoop = input("What is the price per scoop of your ice cream?\n")
+            if not self.check_int(price_per_scoop):
+                continue
+            scoops = input("How many scoops would you like?\n")
+            if not self.check_int(scoops):
+                continue
+
+            return IceCream(name, tax, price_per_scoop, scoops)
+        
     def user_prompt_sundae(self):
         pass
 
