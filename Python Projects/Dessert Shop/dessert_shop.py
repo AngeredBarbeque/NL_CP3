@@ -7,6 +7,7 @@ from tabulate import tabulate
 #Creates an order object containing instances of all child/grandchild classes 
 #Prints each item in the order, and then prints the length of it
 def main():
+    shop = DessertShop
     order = Order()
     prompt = '\n'.join([ '\n',
             '1: Candy',
@@ -15,6 +16,7 @@ def main():
             '4: Sundae',
             '\nWhat would you like to add to the order? (1-4, Enter for done): '
       ])
+    done = False
     while not done:
       choice = input(prompt)
       match choice:

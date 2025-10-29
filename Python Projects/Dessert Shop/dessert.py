@@ -3,13 +3,36 @@ from abc import ABC, abstractmethod
 
 
 class DessertShop():
-    def user_prompt_candy():
+    def check_float(num):
+        try:
+            num = float(num)
+            if num < 0:
+                print("Please enter a positive number.")
+                return False
+        except:
+                print("Please enter a valid number.")
+                return False
+        return True
+    def user_prompt_candy(self):
+        while True:
+            name = input("What is the name of your candy?\n")
+            tax = input("What is the tax percent?\n")
+            if not self.check_int(tax):
+                continue
+            price_per_pound = input("What is the price per pound of your candy?\n")
+            if not self.check_int(price_per_pound):
+                continue
+            amount = input("How many pounds would you like?\n")
+            if not self.check_int(amount):
+                continue
+
+            return Candy(name, tax, price_per_pound, amount)
+
+    def user_prompt_cookie(self):
         pass
-    def user_prompt_cookie():
+    def user_prompt_icecream(self):
         pass
-    def user_prompt_icecream():
-        pass
-    def user_prompt_sundae():
+    def user_prompt_sundae(self):
         pass
 
 
