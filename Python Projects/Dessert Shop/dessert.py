@@ -1,5 +1,18 @@
 #Creates a parent classes for all other desserts
 from abc import ABC, abstractmethod
+
+
+class DessertShop():
+    def user_prompt_candy():
+        pass
+    def user_prompt_cookie():
+        pass
+    def user_prompt_icecream():
+        pass
+    def user_prompt_sundae():
+        pass
+
+
 class DessertItem(ABC):
     def __init__(self,name="",tax_percent=7.25):
         self.name = name

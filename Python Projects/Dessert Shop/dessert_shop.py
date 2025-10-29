@@ -8,21 +8,36 @@ from tabulate import tabulate
 #Prints each item in the order, and then prints the length of it
 def main():
     order = Order()
-    gummy = Candy("Gummy Bears", 10, 1.5, 0.25)
-    corn = Candy("Candy Corn", 10, 0.35, 0.25)
-    chocolate = Cookies("Chocolate Chip", 10, 3.99, 6)
-    oat = Cookies("Oatmeal Raisin", 10, 3.45, 2)
-    pistachio = IceCream("Pistachio", 10, 0.79, 2)
-    vanilla = Sundae("Vanilla", 10, 0.69,3,"Fudge",1.29)
-    order.add(gummy)
-    order.add(corn)
-    order.add(chocolate)
-    order.add(pistachio)
-    order.add(oat)
-    order.add(vanilla)
-    for i in order.order:
-        print(i.name)
-    print(len(order))
+    prompt = '\n'.join([ '\n',
+            '1: Candy',
+            '2: Cookie',            
+            '3: Ice Cream',
+            '4: Sundae',
+            '\nWhat would you like to add to the order? (1-4, Enter for done): '
+      ])
+    while not done:
+      choice = input(prompt)
+      match choice:
+        case '':
+          done = True
+        case '1':            
+          item = shop.user_prompt_candy()
+          order.add(item)
+          print(f'{item.name} has been added to your order.')
+        case '2':            
+          item = shop.user_prompt_cookie()
+          order.add(item)
+          print(f'{item.name} has been added to your order.')
+        case '3':            
+          item = shop.user_prompt_icecream()
+          order.add(item)
+          print(f'{item.name} has been added to your order.')
+        case '4':            
+          item = shop.user_prompt_sundae()
+          order.add(item)
+          print(f'{item.name} has been added to your order.')
+        case _:            
+          print('Invalid response:  Please enter a choice from the menu (1-4) or Enter')
     data = []
     for i in order.order:
         data.append([i.name, f"${round(i.calculateCost(),2)}", f"${round(i.calculateTax(),2)}"])
