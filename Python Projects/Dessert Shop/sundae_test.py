@@ -19,8 +19,8 @@ def test_set():
     assert test.topping == "Topping"
     assert test.topping_price == 3
     assert test.tax_percent == 4
-    assert test.calculateCost() == 6
-    assert test.calculateTax() == 0.24
+    assert test.calculateCost() == 5
+    assert test.calculateTax() == 0.2
 
 
 

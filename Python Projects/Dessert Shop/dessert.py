@@ -3,7 +3,7 @@ from abc import ABC, abstractmethod
 
 
 class DessertShop():
-    def check_float(num):
+    def check_float(self, num):
         try:
             num = float(num)
             if num < 0:
@@ -17,49 +17,65 @@ class DessertShop():
         while True:
             name = input("What is the name of your candy?\n")
             tax = input("What is the tax percent?\n")
-            if not self.check_int(tax):
+            if not self.check_float(tax):
                 continue
             price_per_pound = input("What is the price per pound of your candy?\n")
-            if not self.check_int(price_per_pound):
+            if not self.check_float(price_per_pound):
                 continue
             amount = input("How many pounds would you like?\n")
-            if not self.check_int(amount):
+            if not self.check_float(amount):
                 continue
 
-            return Candy(name, tax, price_per_pound, amount)
+            return Candy(name, float(tax), float(price_per_pound), float(amount))
 
     def user_prompt_cookie(self):
         while True:
             name = input("What is the name of your cookie?\n")
             tax = input("What is the tax percent?\n")
-            if not self.check_int(tax):
+            if not self.check_float(tax):
                 continue
             price_per_dozen = input("What is the price per dozen of your cookie?\n")
-            if not self.check_int(price_per_dozen):
+            if not self.check_float(price_per_dozen):
                 continue
             amount = input("How many cookies would you like?\n")
-            if not self.check_int(amount):
+            if not self.check_float(amount):
                 continue
 
-            return Cookies(name, tax, price_per_dozen, amount)
+            return Cookies(name, float(tax), float(price_per_dozen), float(amount))
         
     def user_prompt_icecream(self):
         while True:
             name = input("What is the name of your ice cream?\n")
             tax = input("What is the tax percent?\n")
-            if not self.check_int(tax):
+            if not self.check_float(tax):
                 continue
             price_per_scoop = input("What is the price per scoop of your ice cream?\n")
-            if not self.check_int(price_per_scoop):
+            if not self.check_float(price_per_scoop):
                 continue
             scoops = input("How many scoops would you like?\n")
-            if not self.check_int(scoops):
+            if not self.check_float(scoops):
                 continue
 
-            return IceCream(name, tax, price_per_scoop, scoops)
+            return IceCream(name, float(tax), float(price_per_scoop), float(scoops))
         
     def user_prompt_sundae(self):
-        pass
+        while True:
+            name = input("What is the name of your ice cream?\n")
+            tax = input("What is the tax percent?\n")
+            if not self.check_float(tax):
+                continue
+            price_per_scoop = input("What is the price per scoop of your ice cream?\n")
+            if not self.check_float(price_per_scoop):
+                continue
+            scoops = input("How many scoops would you like?\n")
+            if not self.check_float(scoops):
+                continue
+            topping = input("What topping would you like?\n")
+            topping_price = input("What is the price of that topping?\n")
+            if not self.check_float(topping_price):
+                continue
+
+            return Sundae(name, float(tax), float(price_per_scoop), float(scoops), topping, float(topping_price))
 
 
 class DessertItem(ABC):
