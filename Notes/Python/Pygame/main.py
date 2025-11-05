@@ -22,7 +22,7 @@ What events can I listen for in pygame? What do those events do?
 
 
 How can I detect collision with pygame?
-   
+    Compare x and y values between two objects.
 
 How do you add sounds in pygame?
     pygame.mixer.sound.play(pygame.mixer.Sound('soundfile.wav'))
@@ -36,7 +36,7 @@ screen = pygame.display.set_mode((1200, 720)) #dimensions on screen
 pos_x = 100
 pos_y = 200
 
-ufo = pygame.image.load("Notes/Python/Pygame/ufo.png") #load image file
+ufo = pygame.image.load("Notes/Python/Pygame/spaceship.png") #load image file
 #ufo = pygame.transform.scale(ufo, (100, 75)) #resize image
 ufo_rect = ufo.get_rect(topleft = (558,558)) #get rectangle around image for collision detection
 
